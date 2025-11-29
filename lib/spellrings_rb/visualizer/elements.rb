@@ -1,0 +1,89 @@
+# frozen_string_literal: true
+
+module Spellrings
+  class Visualizer # rubocop:disable Style/Documentation
+    private
+
+    def draw_element(element, start, ring)
+      log "element: #{element.type} #{element.content}, #{start}"
+
+      radius = ring.size
+
+      draw_element_underline element, start, ring
+
+      case [element.type, element.content]
+      in [:grimoire | :spell, *]
+        # Draw element sigil
+        svg.text element.type.to_s[0].upcase, transform: element_transform(start, ring.elements_chars, radius)
+        draw_ring element, transform: child_cicle_transform(start, ring, element)
+
+      in [:word, Complex | Rational] then draw_word element.content.inspect.gsub(/[()]/, ''), start, ring
+      in [:word, *] then draw_word element.content.inspect, start, ring
+      in [:sigil, *] then draw_sigil element, start, ring
+      in [:ritual, *]
+        draw_sigil(Element.new(:sigil, id: :unknown, word: 'ritual'),
+                   transform: element_transform(start, ring.elements_chars, radius))
+
+      else draw_sigil :unknown, transform: element_transform(start, ring.elements_chars, radius)
+      end
+    end
+
+    def draw_element_underline(element, start, ring)
+      radius = ring.size * FONT_WIDTH + LINE_HEIGHT + 2
+      element_half_angle = Math::PI / ring.elements_chars
+      angle = 2 * Math::PI * element.chars.size / ring.elements_chars
+      transform =
+        "rotate(#{-360 * start / ring.elements_chars})" \
+        "rotate(#{(-angle + element_half_angle) * 360 / (2 * Math::PI)})"
+      circle_sector r: radius, start_angle: 0, end_angle: angle, transform: transform
+    end
+
+    def draw_word(word, start, ring)
+      word.chars.each_with_index do |char, i|
+        transform = element_transform(start + i, ring.elements_chars, ring.size)
+        svg.text char, transform: transform
+      end
+    end
+
+    def draw_call(element, start, ring)
+      draw_sigil :call, transform: element_transform(start, ring.elements_chars, ring.size)
+      draw_name element.content[:name], start + 1, ring
+    end
+
+    def draw_name(name, start, ring)
+      name.to_s.chars.each_with_index do |char, i|
+        svg.text char, transform: element_transform(start + i, ring.elements_chars, ring.size)
+      end
+    end
+
+    def draw_sigil(element, start, ring)
+      href = @sigils.include?(element.content[:id]) ? "#sigil_#{element.content[:id]}" : '#sigil_unknown'
+      if element.content[:word]
+        draw_word element.content[:word].to_s, start, ring
+        transform = element_transform start + element.content[:word].size / 2.0, ring.elements_chars, ring.size
+      else
+        transform = element_transform start, ring.elements_chars, ring.size
+      end
+      svg.use href: href, transform: "#{transform} #{sigil_transform}"
+    end
+
+    def sigil_transform
+      "translate(#{-SIGIL_VIEWBOX_WIDTH / 2}, #{-SIGIL_VIEWBOX_WIDTH / 2})"
+    end
+
+    def child_cicle_transform(idx, parent_ring, child_ring)
+      "#{rotate_transform(idx, parent_ring.elements_chars)}" \
+      "translate(0,#{(parent_ring.size + child_ring.size) * FONT_WIDTH + LINE_HEIGHT * 3})"
+    end
+
+    def element_transform(idx, size, radius)
+      "#{rotate_transform(idx, size)} translate(0,#{radius * FONT_WIDTH + LINE_HEIGHT / 2})"
+    end
+
+    def rotate_transform(idx, size, angle_offset = 0)
+      angle = 2 * Math::PI * idx / size
+      degrees = angle_offset - 90 - angle * 180 / Math::PI
+      "rotate(#{degrees})"
+    end
+  end
+end

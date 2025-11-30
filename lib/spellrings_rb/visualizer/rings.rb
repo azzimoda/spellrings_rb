@@ -7,13 +7,13 @@ module Spellrings
   class Visualizer
     private
 
-    def draw_ring(circle, transform: nil)
-      log "draw circle: #{circle.name}, #{transform.inspect}"
+    def draw_ring(ring, transform: nil)
+      log "ring: #{ring.name}, #{transform.inspect}"
 
-      r = circle.size * FONT_WIDTH
-      svg.g class: "circle #{circle.type} #{circle.kind}", transform: transform do
+      r = ring.size * FONT_WIDTH
+      svg.g class: "ring #{ring.type} #{ring.kind}", transform: transform do
         # Decorations
-        draw_ring_decorations circle
+        decorate_ring ring
 
         # Ring
         svg.circle r: r
@@ -21,34 +21,45 @@ module Spellrings
 
         # Elements
         svg.g transform: 'rotate(-90)' do
+          unless ring.type == :library
+            svg.line x1: 0, y1: ring.size * FONT_WIDTH + LINE_HEIGHT + 2,
+                     x2: 0, y2: ring.size * FONT_WIDTH + LINE_HEIGHT * 2 - 2,
+                     transform: 'rotate(-90)'
+          end
+
           i = 0
-          circle.elements.each do |el|
-            draw_element el, i, circle
+          ring.elements.each do |el|
+            draw_element el, i, ring
             i += el.chars.size + SPACE_SIZE
           end
         end
       end
     end
 
-    def draw_ring_decorations(circle)
+    def decorate_ring(ring)
       # Name
-      svg.text circle.name
+      svg.text ring.name
 
       # Other
-      case circle.type
-      when :grimoire then draw_grimoire_decorations circle
-      when :spell then draw_spell_decorations circle
+      case ring.type
+      when :library then decorate_library ring # TODO: Implement decorate_library
+      when :grimoire then decorate_grimoire ring
+      when :spell then decorate_spell ring
       end
     end
 
-    def draw_grimoire_decorations(circle)
-      # TODO: Implement draw_grimoire_decorations method.
-      elements = circle.elements.size
-      draw_star elements * 2, elements - 2, circle.size * FONT_WIDTH
+    def decorate_library(ring)
+      # TODO: Implement decorate_library
     end
 
-    def draw_spell_decorations(circle)
-      # TODO: Implement draw_spell_decorations method.
+    def decorate_grimoire(ring)
+      # TODO: Implement decorate_grimoire
+      elements = ring.elements.size
+      draw_star elements * 2, elements - 2, ring.size * FONT_WIDTH
+    end
+
+    def decorate_spell(ring)
+      # TODO: Implement decorate_spell
     end
   end
 end

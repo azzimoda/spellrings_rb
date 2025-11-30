@@ -74,7 +74,7 @@ module Spellrings
 
     def parse_body(ast, ring)
       log "body: #{ast.inspect}"
-      ring << Element.new(:sigil, id: :begin, word: ring.type)
+      ring << Element.new(:sigil, id: :begin, word: ring.type.to_s[0].upcase)
       case ast.type
       in :begin then parse_begin ast, ring
       else parse_element ast, ring

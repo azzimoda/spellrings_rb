@@ -21,7 +21,7 @@ module Spellrings
 
     # Generate SVG file from the library.
     def generate_svg(file_name = nil, size: nil)
-      size ||= p compute_size
+      size ||= compute_size
 
       @svg = Victor::SVG.new viewBox: "0 0 #{size} #{size}", font_family: 'Z003'
       add_style
@@ -49,6 +49,7 @@ module Spellrings
           fill: var(--color);
         }
 
+        line,
         circle,
         polygon,
         path {

@@ -7,7 +7,7 @@ module Spellrings
     def draw_element(element, start, ring)
       log "element: #{element.type} #{element.content}, #{start}"
 
-      draw_element_underline element, start, ring
+      underline_element element, start, ring
       decorate_element element, start, ring
 
       el_transform = element_transform(start, ring.elements_chars, ring.size)
@@ -15,8 +15,9 @@ module Spellrings
       case [element.type, element.content]
       in [:grimoire | :spell, _]
         # TODO: Draw sigil of the ring.
-        svg.text element.type.to_s[0].upcase, transform: el_transform
-        draw_ring element, transform: child_cicle_transform(start, ring, element)
+        # svg.text element.type.to_s[0].upcase, transform: el_transform
+        draw_word Element.new(:word, element.name), start, ring
+        draw_ring element, transform: child_cicle_transform(start + element.chars.size / 2.0, ring, element)
 
       in [:word, Complex | Rational] then draw_word element.content.inspect.gsub(/[()]/, ''), start, ring
       in [:word, _] then draw_word element.content.inspect, start, ring
@@ -26,13 +27,13 @@ module Spellrings
       end
     end
 
-    def draw_element_underline(element, start, ring)
+    def underline_element(element, start, ring)
       radius = ring.size * FONT_WIDTH + LINE_HEIGHT + 2
-      element_half_angle = Math::PI / ring.elements_chars
-      angle = 2 * Math::PI * element.chars.size / ring.elements_chars
+      element_angle = 2 * Math::PI / ring.elements_chars
+      angle = 2 * Math::PI * (element.chars.size + 1) / ring.elements_chars
       transform =
         "rotate(#{-360 * start / ring.elements_chars})" \
-        "rotate(#{(-angle + element_half_angle) * 360 / (2 * Math::PI)})"
+        "rotate(#{(-angle + element_angle) * 360 / (2 * Math::PI)})"
       circle_sector r: radius, start_angle: 0, end_angle: angle, transform: transform
     end
 

@@ -39,6 +39,7 @@ module Spellrings
 
     def chars
       case [@type, @content]
+      in [:grimoire | :spell, _] then @name.nil? ? [' '] : @name.to_s.chars
       in [:word, Complex | Rational] then @content.inspect.gsub(/[()]/, '').chars # @content.inspect.chars
       in [:word, _] then @content.inspect.chars
       in [:sigil, _] then @content[:word]&.to_s&.chars || [@content[:id].to_s[0]]

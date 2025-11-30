@@ -53,9 +53,7 @@ module Spellrings
     end
 
     def decorate_grimoire(ring)
-      # TODO: Implement decorate_grimoire
-      elements = ring.elements.size
-      draw_star elements * 2, elements - 2, ring.size * FONT_WIDTH
+      draw_star ring.size * FONT_WIDTH, ring.elements.size
     end
 
     def decorate_spell(ring)

@@ -10,7 +10,7 @@ module Spellrings
 
     FONT_HEIGHT = 10.0
     FONT_WIDTH = 3.5
-    LINE_HEIGHT = 3 * FONT_HEIGHT
+    LINE_HEIGHT = 2.5 * FONT_HEIGHT
 
     SIGIL_VIEWBOX_WIDTH = 2.0 * LINE_HEIGHT
     SIGIL_VIEWBOX = "#{-0.5 * SIGIL_VIEWBOX_WIDTH} #{-0.5 * SIGIL_VIEWBOX_WIDTH} #{SIGIL_VIEWBOX_WIDTH} #{SIGIL_VIEWBOX_WIDTH}"
@@ -33,6 +33,12 @@ module Spellrings
         end
 
       @svg = Victor::SVG.new viewBox: "#{x} #{y} #{width} #{height}", font_family: 'Z003'
+
+      if ENV['SPELLRING_DEBUG']
+        svg.rect x: x, y: y, width: width, height: height, class: 'debug'
+        points = pp @library.peak_points
+        points.each { |v| svg.circle cx: v[0], cy: v[1], r: 0.5, class: 'debug' }
+      end
 
       add_style
       add_defs
@@ -66,10 +72,6 @@ module Spellrings
           stroke: var(--color);
         }
 
-        path {
-          stroke: yellow;
-        }
-
         .debug {
           fill: none;
           stroke: yellow;
@@ -89,22 +91,23 @@ module Spellrings
       # TODO: Add more sigils
       svg.defs do
         def_sigil :begin do
-          svg.polygon points: star_points(5, 2, 0.4 * SIGIL_VIEWBOX_WIDTH).map { it.join(',') }.join(' ')
+          # svg.polygon points: star_points(5, 2, 0.4 * SIGIL_VIEWBOX_WIDTH).map { it.join(',') }.join(' ')
+          draw_star(0.4 * SIGIL_VIEWBOX_WIDTH, 5)
         end
 
         def_sigil :true do # rubocop:disable Lint/BooleanSymbol
           svg.text 'T'
-          svg.polygon points: star_points(3, 1, 0.25 * SIGIL_VIEWBOX_WIDTH).join(' '), transform: 'translate(0,1.5)'
+          svg.g(transform: 'translate(0,1.5)') { draw_star 0.25 * SIGIL_VIEWBOX_WIDTH, 3 }
         end
 
         def_sigil :false do # rubocop:disable Lint/BooleanSymbol
           svg.text 'F'
-          svg.polygon points: star_points(3, 1, 0.25 * SIGIL_VIEWBOX_WIDTH).join(' '), transform: 'translate(0,1.5)'
+          svg.g(transform: 'translate(0,1.5)') { draw_star 0.25 * SIGIL_VIEWBOX_WIDTH, 3 }
         end
 
         def_sigil :nil do
           svg.text 'N'
-          svg.polygon points: star_points(3, 1, 0.25 * SIGIL_VIEWBOX_WIDTH).join(' '), transform: 'translate(0,1.5)'
+          svg.g(transform: 'translate(0,1.5)') { draw_star 0.25 * SIGIL_VIEWBOX_WIDTH, 3 }
         end
 
         def_sigil :unknown do

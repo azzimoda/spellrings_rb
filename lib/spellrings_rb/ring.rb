@@ -52,7 +52,7 @@ module Spellrings
         end
 
         child_center_distance = full_radius + element.size * Visualizer::FONT_WIDTH + Visualizer::LINE_HEIGHT * 2
-        angle = start_angle - Math::PI / 2 - 2 * Math::PI * i / elements_chars
+        angle = start_angle - Math::PI / 2 - 2 * Math::PI * (i + element.chars.size / 2.0) / elements_chars
         child_center = center + Vector[child_center_distance * Math.cos(angle),
                                        child_center_distance * Math.sin(angle)]
         points += element.peak_points(center: child_center, start_angle: -Math::PI / 2 + angle)

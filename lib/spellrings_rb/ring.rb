@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'matrix'
 require_relative 'element'
 
 module Spellrings
@@ -21,41 +22,6 @@ module Spellrings
     end
     attr_accessor :kind, :name
 
-    def ==(other)
-      unless other.is_a?(Ring)
-        puts "other is not a Ring: #{other.inspect}"
-        return false
-      end
-
-      unless @type == other.type && @kind == other.kind
-        puts "#{type}, #{kind} != #{other.type}, #{other.kind}"
-        return false
-      end
-
-      unless @name == other.name
-        puts "#{name} != #{other.name}"
-        return false
-      end
-
-      unless meta == other.meta
-        puts "#{meta.inspect} != #{other.meta.inspect}"
-        return false
-      end
-
-      unless elements.size == other.elements.size
-        puts "#{elements.inspect} != #{other.elements.inspect}"
-        return false
-      end
-
-      elements.zip(other.elements).all? do |a, b|
-        if a != b
-          puts "#{a.inspect} != #{b.inspect}"
-          return false
-        end
-      end
-      true
-    end
-
     def meta
       @content[:meta]
     end
@@ -66,6 +32,35 @@ module Spellrings
 
     def elements_chars
       elements.map { it.chars.size + SPACE_SIZE }.sum
+    end
+
+    def peak_points(center: Vector[0, 0], start_angle: 0)
+      radius = size * Visualizer::FONT_WIDTH
+      full_radius = radius + Visualizer::LINE_HEIGHT
+
+      points = [center,
+                center + Vector[full_radius, 0],
+                center + Vector[0, full_radius],
+                center - Vector[full_radius, 0],
+                center - Vector[0, full_radius]]
+
+      i = 0
+      elements.each do |element|
+        unless element.is_a?(Ring)
+          i += element.chars.size + SPACE_SIZE
+          next
+        end
+
+        child_center_distance = full_radius + element.size * Visualizer::FONT_WIDTH + Visualizer::LINE_HEIGHT * 2
+        angle = start_angle - Math::PI / 2 - 2 * Math::PI * i / elements_chars
+        child_center = center + Vector[child_center_distance * Math.cos(angle),
+                                       child_center_distance * Math.sin(angle)]
+        points += element.peak_points(center: child_center, start_angle: -Math::PI / 2 + angle)
+
+        i += element.chars.size + SPACE_SIZE
+      end
+
+      points
     end
 
     def size

@@ -7,11 +7,15 @@ require_relative 'visualizer/rings'
 module Spellrings
   class Visualizer
     DEFAULT_COLOR = '#9B111E'
+
     FONT_HEIGHT = 10.0
     FONT_WIDTH = 3.5
     LINE_HEIGHT = 3 * FONT_HEIGHT
+
     SIGIL_VIEWBOX_WIDTH = 2.0 * LINE_HEIGHT
     SIGIL_VIEWBOX = "#{-0.5 * SIGIL_VIEWBOX_WIDTH} #{-0.5 * SIGIL_VIEWBOX_WIDTH} #{SIGIL_VIEWBOX_WIDTH} #{SIGIL_VIEWBOX_WIDTH}"
+
+    VIEWBOX_PADDING = 10.0
 
     def initialize(library, color: nil)
       @library = library
@@ -20,14 +24,19 @@ module Spellrings
     attr_reader :svg
 
     # Generate SVG file from the library.
-    def generate_svg(file_name = nil, size: nil)
-      size ||= compute_size
+    def generate_svg(file_name = nil, viewbox: nil)
+      x, y, width, height =
+        if viewbox
+          viewbox.split(' ').map(&:to_f)
+        else
+          compute_viewbox
+        end
 
-      @svg = Victor::SVG.new viewBox: "0 0 #{size} #{size}", font_family: 'Z003'
+      @svg = Victor::SVG.new viewBox: "#{x} #{y} #{width} #{height}", font_family: 'Z003'
+
       add_style
       add_defs
-      svg.rect width: size, height: size, class: 'debug' if ENV['CMRB_DEBUG']
-      draw_ring @library, transform: "translate(#{size / 2},#{size / 2})"
+      draw_ring @library
       svg.tap { svg.save file_name if file_name }
     end
     alias cast generate_svg
@@ -64,6 +73,14 @@ module Spellrings
         .debug {
           fill: none;
           stroke: yellow;
+        }
+
+        text.debug {
+          fill: yellow;
+          font-family: sans-serif;
+          font-size: 10px;
+          text-anchor: start;
+          dominant-baseline: hanging;
         }
       CSS
     end
@@ -104,9 +121,15 @@ module Spellrings
       svg.symbol(**kwargs) { block.call }
     end
 
-    def compute_size
-      max_child_size = 2 * ((@library.elements.select { it.is_a? Ring }.map(&:size).max || 0) + LINE_HEIGHT)
-      2 * ((@library.size + max_child_size) * FONT_WIDTH + LINE_HEIGHT)
+    def compute_viewbox
+      peak_points = @library.peak_points
+      x_min, x_max = peak_points.map { it[0] }.minmax
+      y_min, y_max = peak_points.map { it[1] }.minmax
+
+      width = x_max - x_min
+      height = y_max - y_min
+
+      [x_min - VIEWBOX_PADDING, y_min - VIEWBOX_PADDING, width + VIEWBOX_PADDING * 2, height + VIEWBOX_PADDING * 2]
     end
 
     def log(*args)

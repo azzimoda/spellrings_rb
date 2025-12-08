@@ -10,14 +10,15 @@ module Spellrings
       underline_element element, start, ring
       decorate_element element, start, ring
 
-      el_transform = element_transform(start, ring.elements_chars, ring.size)
+      el_transform = element_transform start, ring.circle_length(@font, @font_size), ring.radius(@font, @font_size)
 
       case [element.type, element.content]
       in [:grimoire | :spell, _]
         # TODO: Draw sigil of the ring.
         # svg.text element.type.to_s[0].upcase, transform: el_transform
         draw_word Element.new(:word, element.name), start, ring
-        draw_ring element, transform: child_cicle_transform(start + element.chars.size / 2.0, ring, element)
+        transform = child_cicle_transform start + element.width(@font, @font_size) / 2.0, ring, element
+        draw_ring element, transform: transform
 
       in [:word, Complex | Rational] then draw_word element.content.inspect.gsub(/[()]/, ''), start, ring
       in [:word, _] then draw_word element.content.inspect, start, ring
@@ -28,11 +29,14 @@ module Spellrings
     end
 
     def underline_element(element, start, ring)
-      radius = ring.size * FONT_WIDTH + LINE_HEIGHT + 2
-      element_angle = 2 * Math::PI / ring.elements_chars
-      angle = 2 * Math::PI * (element.chars.size + 1) / ring.elements_chars
+      radius = ring.radius(@font, @font_size) + @line_height + 2
+
+      circle_length = ring.circle_length @font, @font_size
+      element_angle = 2 * Math::PI / circle_length
+      angle = element_angle * (element.width(@font, @font_size) + 1)
+
       transform =
-        "rotate(#{-360 * start / ring.elements_chars})" \
+        "rotate(#{-360 * start / circle_length})" \
         "rotate(#{(-angle + element_angle) * 360 / (2 * Math::PI)})"
       circle_sector r: radius, start_angle: 0, end_angle: angle, transform: transform
     end
@@ -47,62 +51,73 @@ module Spellrings
     end
 
     def decorate_string(element, start, ring)
-      angle = 2 * Math::PI * (element.chars.size - 1) / ring.elements_chars
+      width = element.width(@font, @font_size) - @space_width
+      angle = 2 * Math::PI * width / ring.circle_length(@font, @font_size)
       transform =
-        "rotate(#{-360 * start / ring.elements_chars})" \
+        "rotate(#{-360 * start / ring.circle_length(@font, @font_size)})" \
         "rotate(#{-angle * 360 / (2 * Math::PI)})"
 
-      r0 = ring.size * FONT_WIDTH
-      circle_sector r: r0 + 0.75 * LINE_HEIGHT, start_angle: 0, end_angle: angle, transform: transform
-      circle_sector r: r0 + 0.25 * LINE_HEIGHT, start_angle: 0, end_angle: angle, transform: transform
+      r0 = ring.radius(@font, @font_size)
+      circle_sector r: r0 + 0.75 * @line_height, start_angle: 0, end_angle: angle, transform: transform
+      circle_sector r: r0 + 0.25 * @line_height, start_angle: 0, end_angle: angle, transform: transform
 
-      transform = "#{element_transform(start, ring.elements_chars, ring.size)} rotate(90)"
-      circle_sector r: 0.25 * LINE_HEIGHT, start_angle: 0, end_angle: Math::PI, transform: transform
+      circle_length = ring.circle_length @font, @font_size
+      transform = "#{element_transform(start, circle_length, r0)} rotate(90)"
+      circle_sector r: 0.25 * @line_height, start_angle: 0, end_angle: Math::PI, transform: transform
 
-      transform = "#{element_transform(start + element.chars.size - 1, ring.elements_chars, ring.size)} rotate(-90)"
-      circle_sector r: 0.25 * LINE_HEIGHT, start_angle: 0, end_angle: Math::PI, transform: transform
+      transform = "#{element_transform(start + width, circle_length, r0)} rotate(-90)"
+      circle_sector r: 0.25 * @line_height, start_angle: 0, end_angle: Math::PI, transform: transform
     end
 
     def draw_word(word, start, ring)
-      word.chars.each_with_index do |char, i|
-        transform = element_transform(start + i, ring.elements_chars, ring.size)
+      shift = 0
+      word.chars.each_with_index do |char, _|
+        transform =
+          element_transform start + shift, ring.circle_length(@font, @font_size), ring.radius(@font, @font_size)
         svg.text char, transform: transform
+        # svg.circle cx: 0, cy: 0, r: 0.5, class: 'debug', transform: transform if ENV['SPELLRING_DEBUG']
+        shift += FontManager.str_width char, @font, @font_size
       end
     end
 
     def draw_call(element, start, ring)
-      draw_sigil :call, transform: element_transform(start, ring.elements_chars, ring.size)
+      transform = element_transform start, ring.circle_length(@font, @font_size), ring.radius(@font, @font_size)
+      draw_sigil :call, transform: transform
       draw_name element.content[:name], start + 1, ring
     end
 
     def draw_name(name, start, ring)
       name.to_s.chars.each_with_index do |char, i|
-        svg.text char, transform: element_transform(start + i, ring.elements_chars, ring.size)
+        transform = element_transform start + i, ring.circle_length(@font, @font_size), ring.radius(@font, @font_size)
+        svg.text char, transform: transform
       end
     end
 
     def draw_sigil(element, start, ring)
       href = @sigils.include?(element.content[:id]) ? "#sigil_#{element.content[:id]}" : '#sigil_unknown'
-      if element.content[:word]
-        draw_word element.content[:word].to_s, start, ring
-        transform = element_transform start + element.content[:word].size / 2, ring.elements_chars, ring.size
-      else
-        transform = element_transform start, ring.elements_chars, ring.size
-      end
+      transform =
+        if element.content[:word]
+          draw_word element.content[:word].to_s, start, ring
+          element_transform start + element.content[:word].size / 2,
+                            ring.circle_length(@font, @font_size),
+                            ring.radius(@font, @font_size)
+        else
+          element_transform start, ring.circle_length(@font, @font_size), ring.radius(@font, @font_size)
+        end
       svg.use href: href, transform: "#{transform} #{sigil_transform}"
     end
 
     def sigil_transform
-      "translate(#{-SIGIL_VIEWBOX_WIDTH / 2}, #{-SIGIL_VIEWBOX_WIDTH / 2})"
+      "translate(#{-@sigil_viewbox_width / 2}, #{-@sigil_viewbox_width / 2})"
     end
 
     def child_cicle_transform(idx, parent_ring, child_ring)
-      "#{rotate_transform(idx, parent_ring.elements_chars)}" \
-      "translate(0,#{(parent_ring.size + child_ring.size) * FONT_WIDTH + LINE_HEIGHT * 3})"
+      "#{rotate_transform(idx, parent_ring.circle_length(@font, @font_size))}" \
+      "translate(0,#{parent_ring.radius(@font, @font_size) + child_ring.radius(@font, @font_size) + @line_height * 3})"
     end
 
     def element_transform(idx, size, radius)
-      "#{rotate_transform(idx, size)} translate(0,#{radius * FONT_WIDTH + LINE_HEIGHT / 2})"
+      "#{rotate_transform(idx, size)} translate(0,#{radius + @line_height / 2})"
     end
 
     def rotate_transform(idx, size, angle_offset = 0)

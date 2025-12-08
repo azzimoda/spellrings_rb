@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'fonts'
+
 module Spellrings
   # Represents any token which can be part of expression, e.g. method call, operator, variable, etc.
   class Element
@@ -21,10 +23,6 @@ module Spellrings
     end
     attr_accessor :type, :content
 
-    def ==(other)
-      @type == other.type && @content == other.content
-    end
-
     def to_h
       { class: :element, type: @type, content: @content }
     end
@@ -33,8 +31,8 @@ module Spellrings
       to_h.to_json(*args, **kwargs)
     end
 
-    def size
-      chars.size
+    def width(font, font_size = 12)
+      FontManager.str_width chars.join, font, font_size
     end
 
     def chars
@@ -44,9 +42,7 @@ module Spellrings
       in [:word, _] then @content.inspect.chars
       in [:sigil, _] then @content[:word]&.to_s&.chars || [@content[:id].to_s[0]]
       in [:ritual, _] then ['R'] # TODO: Return special sigil.
-      else
-        # puts "Unknown element type: #{inspect}"
-        [' '] # TODO: Return special sigil.
+      else [' ']
       end
     end
   end

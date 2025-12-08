@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
+require_relative 'spellrings_rb/fonts'
 require_relative 'spellrings_rb/parser'
 require_relative 'spellrings_rb/visualizer'
 
 module Spellrings
   class << self
-    def build_file(source_filename, output_filename = nil)
-      dir = File.dirname source_filename
-      name = File.basename source_filename, '.rb'
-      output_filename ||= File.join dir, "#{name}.svg"
+    def build_file(source_file, output_file: nil, font_family: DEFAULT_FONT)
+      dir = File.dirname source_file
+      name = File.basename source_file, '.rb'
+      output_file ||= File.join dir, "#{name}.svg"
 
-      library = Spellrings::Parser.parse_file source_filename
-      Visualizer.new(library, color: ENV['SPELLRING_COLOR']).cast output_filename
-      output_filename
+      library = Spellrings::Parser.parse_file source_file
+      Visualizer.new(library).generate_svg(font_family: font_family, output_file: output_file)
+      output_file
     end
 
     def node_types(source)

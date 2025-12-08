@@ -1,5 +1,10 @@
-<svg viewBox="-55.05352282957881 -55.05352282957881 110.10704565915762 110.10704565915762" font-family="Z003" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-59.671550966158264 -59.671550966158264 119.34310193231653 119.34310193231653" font-family="Z003" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
 
+<rect x="-59.671550966158264" y="-59.671550966158264" width="119.34310193231653" height="119.34310193231653" class="debug"/>
+<circle cx="49.671550966158264" cy="0" r="0.5" class="debug"/>
+<circle cx="0" cy="49.671550966158264" r="0.5" class="debug"/>
+<circle cx="-49.671550966158264" cy="0" r="0.5" class="debug"/>
+<circle cx="0" cy="-49.671550966158264" r="0.5" class="debug"/>
 <style>
 * {
   stroke-width: 0.75;
@@ -8,7 +13,7 @@
 
 text {
   font-family: Z003;
-  font-size: 10.0px;
+  font-size: 12px;
   text-anchor: middle;
   dominant-baseline: middle;
   fill: var(--color);
@@ -37,131 +42,131 @@ text.debug {
 
 </style>
 <defs>
-<symbol id="sigil_begin" viewBox="-25.0 -25.0 50.0 50.0" width="50.0" height="50.0">
-<path d="M1.2246467991473533e-15,-20.0 L1.2246467991473533e-15,-20.0 L11.755705045849464,16.18033988749895 L-19.021130325903073,-6.1803398874989455 L19.02113032590307,-6.180339887498948 L-11.75570504584946,16.18033988749895 Z"/>
+<symbol id="sigil_begin" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<path d="M1.4695761589768238e-15,-24.0 L1.4695761589768238e-15,-24.0 L14.106846055019355,19.41640786499874 L-22.825356391083687,-7.416407864998735 L22.825356391083684,-7.416407864998737 L-14.106846055019354,19.41640786499874 Z"/>
 </symbol>
-<symbol id="sigil_true" viewBox="-25.0 -25.0 50.0 50.0" width="50.0" height="50.0">
+<symbol id="sigil_true" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <text>
 T
 </text>
 <g transform="translate(0,1.5)">
-<path d="M7.654042494670958e-16,-12.5 L7.654042494670958e-16,-12.5 L10.825317547305485,6.249999999999998 L-10.825317547305481,6.250000000000004 Z"/>
+<path d="M9.18485099360515e-16,-15.0 L9.18485099360515e-16,-15.0 L12.99038105676658,7.499999999999997 L-12.990381056766577,7.500000000000005 Z"/>
 </g>
 </symbol>
-<symbol id="sigil_false" viewBox="-25.0 -25.0 50.0 50.0" width="50.0" height="50.0">
+<symbol id="sigil_false" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <text>
 F
 </text>
 <g transform="translate(0,1.5)">
-<path d="M7.654042494670958e-16,-12.5 L7.654042494670958e-16,-12.5 L10.825317547305485,6.249999999999998 L-10.825317547305481,6.250000000000004 Z"/>
+<path d="M9.18485099360515e-16,-15.0 L9.18485099360515e-16,-15.0 L12.99038105676658,7.499999999999997 L-12.990381056766577,7.500000000000005 Z"/>
 </g>
 </symbol>
-<symbol id="sigil_nil" viewBox="-25.0 -25.0 50.0 50.0" width="50.0" height="50.0">
+<symbol id="sigil_nil" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <text>
 N
 </text>
 <g transform="translate(0,1.5)">
-<path d="M7.654042494670958e-16,-12.5 L7.654042494670958e-16,-12.5 L10.825317547305485,6.249999999999998 L-10.825317547305481,6.250000000000004 Z"/>
+<path d="M9.18485099360515e-16,-15.0 L9.18485099360515e-16,-15.0 L12.99038105676658,7.499999999999997 L-12.990381056766577,7.500000000000005 Z"/>
 </g>
 </symbol>
-<symbol id="sigil_unknown" viewBox="-25.0 -25.0 50.0 50.0" width="50.0" height="50.0">
-<circle r="12.5"/>
+<symbol id="sigil_unknown" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<circle r="15.0"/>
 </symbol>
 </defs>
 <g class="ring library " transform="">
 <text>
 script
 </text>
-<circle r="20.053522829578814"/>
-<circle r="45.05352282957881"/>
+<circle r="19.671550966158264"/>
+<circle r="49.671550966158264"/>
 <g transform="rotate(-90)">
-<circle stroke-dasharray="16.42477796076938 279.2212253330794" transform="rotate(0)rotate(-10.0)" r="47.05352282957881"/>
-<text transform="rotate(-90.0) translate(0,32.55352282957881)">
+<circle stroke-dasharray="20.908648555378512 303.75328127436825" transform="rotate(0.0)rotate(-20.271844660194173)" r="51.671550966158264"/>
+<text transform="rotate(-90.0) translate(0,34.671550966158264)">
 L
 </text>
-<use href="#sigil_begin" transform="rotate(-90.0) translate(0,32.55352282957881) translate(-25.0, -25.0)"/>
-<circle stroke-dasharray="8.21238898038469 287.43361431346415" transform="rotate(-30)rotate(0.0)" r="47.05352282957881"/>
-<use href="#sigil_unknown" transform="rotate(-120.0) translate(0,32.55352282957881) translate(-25.0, -25.0)"/>
-<circle stroke-dasharray="41.061944901923454 254.58405839192537" transform="rotate(-50)rotate(-40.0)" r="47.05352282957881"/>
-<text transform="rotate(-140.0) translate(0,32.55352282957881)">
+<use href="#sigil_begin" transform="rotate(-90.0) translate(0,34.671550966158264) translate(-30.0, -30.0)"/>
+<circle stroke-dasharray="2.6267146426354917 322.0352151871113" transform="rotate(-27.961165048543688)rotate(0.0)" r="51.671550966158264"/>
+<use href="#sigil_unknown" transform="rotate(-117.96116504854369) translate(0,34.671550966158264) translate(-30.0, -30.0)"/>
+<circle stroke-dasharray="51.168401238539374 273.4935285912074" transform="rotate(-35.6504854368932)rotate(-53.8252427184466)" r="51.671550966158264"/>
+<text transform="rotate(-125.6504854368932) translate(0,34.671550966158264)">
 p
 </text>
-<text transform="rotate(-150.0) translate(0,32.55352282957881)">
+<text transform="rotate(-141.02912621359224) translate(0,34.671550966158264)">
 u
 </text>
-<text transform="rotate(-160.0) translate(0,32.55352282957881)">
+<text transform="rotate(-157.10679611650485) translate(0,34.671550966158264)">
 t
 </text>
-<text transform="rotate(-170.0) translate(0,32.55352282957881)">
+<text transform="rotate(-168.29126213592235) translate(0,34.671550966158264)">
 s
 </text>
-<use href="#sigil_unknown" transform="rotate(-160.0) translate(0,32.55352282957881) translate(-25.0, -25.0)"/>
-<circle stroke-dasharray="131.39822368615503 164.2477796076938" transform="rotate(-110)rotate(-150.00000000000003)" r="47.05352282957881"/>
-<circle stroke-dasharray="94.81489286485113 148.99483164476607" transform="rotate(-110)rotate(-140.0)" r="38.80352282957881"/>
-<circle stroke-dasharray="64.27163095495038 100.99827721492204" transform="rotate(-110)rotate(-140.0)" r="26.303522829578814"/>
-<circle stroke-dasharray="19.634954084936208 19.634954084936208" transform="rotate(-200.0) translate(0,32.55352282957881) rotate(90)" r="6.25"/>
-<circle stroke-dasharray="19.634954084936208 19.634954084936208" transform="rotate(-340.0) translate(0,32.55352282957881) rotate(-90)" r="6.25"/>
-<text transform="rotate(-200.0) translate(0,32.55352282957881)">
+<use href="#sigil_unknown" transform="rotate(-131.47572815533982) translate(0,34.671550966158264) translate(-30.0, -30.0)"/>
+<circle stroke-dasharray="170.31617742848528 154.3457524012615" transform="rotate(-97.16504854368932)rotate(-185.94174757281553)" r="51.671550966158264"/>
+<circle stroke-dasharray="131.1995644659085 133.77210494563218" transform="rotate(-97.16504854368932)rotate(-178.25242718446603)" r="42.171550966158264"/>
+<circle stroke-dasharray="84.53318815530284 86.19070164854406" transform="rotate(-97.16504854368932)rotate(-178.25242718446603)" r="27.171550966158264"/>
+<circle stroke-dasharray="23.561944901923447 23.561944901923447" transform="rotate(-187.1650485436893) translate(0,34.671550966158264) rotate(90)" r="7.5"/>
+<circle stroke-dasharray="23.561944901923447 23.561944901923447" transform="rotate(-365.4174757281553) translate(0,34.671550966158264) rotate(-90)" r="7.5"/>
+<text transform="rotate(-187.1650485436893) translate(0,34.671550966158264)">
 "
 </text>
-<text transform="rotate(-210.0) translate(0,32.55352282957881)">
+<text transform="rotate(-194.85436893203882) translate(0,34.671550966158264)">
 H
 </text>
-<text transform="rotate(-220.0) translate(0,32.55352282957881)">
+<text transform="rotate(-218.62135922330094) translate(0,34.671550966158264)">
 e
 </text>
-<text transform="rotate(-230.0) translate(0,32.55352282957881)">
+<text transform="rotate(-230.50485436893206) translate(0,34.671550966158264)">
 l
 </text>
-<text transform="rotate(-239.99999999999997) translate(0,32.55352282957881)">
+<text transform="rotate(-238.89320388349518) translate(0,34.671550966158264)">
 l
 </text>
-<text transform="rotate(-250.0) translate(0,32.55352282957881)">
+<text transform="rotate(-247.28155339805826) translate(0,34.671550966158264)">
 o
 </text>
-<text transform="rotate(-260.0) translate(0,32.55352282957881)">
+<text transform="rotate(-261.2621359223301) translate(0,34.671550966158264)">
 ,
 </text>
-<text transform="rotate(-270.0) translate(0,32.55352282957881)">
+<text transform="rotate(-268.95145631067953) translate(0,34.671550966158264)">
  
 </text>
-<text transform="rotate(-280.0) translate(0,32.55352282957881)">
+<text transform="rotate(-276.6407766990291) translate(0,34.671550966158264)">
 W
 </text>
-<text transform="rotate(-290.0) translate(0,32.55352282957881)">
+<text transform="rotate(-307.3980582524272) translate(0,34.671550966158264)">
 o
 </text>
-<text transform="rotate(-300.0) translate(0,32.55352282957881)">
+<text transform="rotate(-321.37864077669906) translate(0,34.671550966158264)">
 r
 </text>
-<text transform="rotate(-310.0) translate(0,32.55352282957881)">
+<text transform="rotate(-331.8640776699029) translate(0,34.671550966158264)">
 l
 </text>
-<text transform="rotate(-320.0) translate(0,32.55352282957881)">
+<text transform="rotate(-340.252427184466) translate(0,34.671550966158264)">
 d
 </text>
-<text transform="rotate(-330.0) translate(0,32.55352282957881)">
+<text transform="rotate(-355.63106796116506) translate(0,34.671550966158264)">
 !
 </text>
-<text transform="rotate(-340.0) translate(0,32.55352282957881)">
+<text transform="rotate(-365.4174757281553) translate(0,34.671550966158264)">
 "
 </text>
-<circle stroke-dasharray="8.21238898038469 287.43361431346415" transform="rotate(-280)rotate(0.0)" r="47.05352282957881"/>
-<use href="#sigil_unknown" transform="rotate(-370.0) translate(0,32.55352282957881) translate(-25.0, -25.0)"/>
-<circle stroke-dasharray="41.061944901923454 254.58405839192537" transform="rotate(-300)rotate(-40.0)" r="47.05352282957881"/>
-<text transform="rotate(-389.99999999999994) translate(0,32.55352282957881)">
+<circle stroke-dasharray="2.6267146426354917 322.0352151871113" transform="rotate(-290.79611650485435)rotate(0.0)" r="51.671550966158264"/>
+<use href="#sigil_unknown" transform="rotate(-380.79611650485435) translate(0,34.671550966158264) translate(-30.0, -30.0)"/>
+<circle stroke-dasharray="51.168401238539374 273.4935285912074" transform="rotate(-298.4854368932039)rotate(-53.8252427184466)" r="51.671550966158264"/>
+<text transform="rotate(-388.4854368932038) translate(0,34.671550966158264)">
 p
 </text>
-<text transform="rotate(-400.0) translate(0,32.55352282957881)">
+<text transform="rotate(-403.86407766990294) translate(0,34.671550966158264)">
 u
 </text>
-<text transform="rotate(-410.0) translate(0,32.55352282957881)">
+<text transform="rotate(-419.94174757281553) translate(0,34.671550966158264)">
 t
 </text>
-<text transform="rotate(-420.00000000000006) translate(0,32.55352282957881)">
+<text transform="rotate(-431.126213592233) translate(0,34.671550966158264)">
 s
 </text>
-<use href="#sigil_unknown" transform="rotate(-410.0) translate(0,32.55352282957881) translate(-25.0, -25.0)"/>
+<use href="#sigil_unknown" transform="rotate(-394.3106796116504) translate(0,34.671550966158264) translate(-30.0, -30.0)"/>
 </g>
 </g>
 </svg>

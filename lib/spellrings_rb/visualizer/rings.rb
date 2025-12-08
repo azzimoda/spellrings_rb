@@ -10,27 +10,28 @@ module Spellrings
     def draw_ring(ring, transform: nil)
       log "ring: #{ring.name}, #{transform.inspect}"
 
-      r = ring.size * FONT_WIDTH
+      radius = ring.radius @font, @font_size
       svg.g class: "ring #{ring.type} #{ring.kind}", transform: transform do
         # Decorations
         decorate_ring ring
 
         # Ring
-        svg.circle r: r
-        svg.circle r: r + LINE_HEIGHT
+        svg.circle r: radius
+        svg.circle r: radius + @line_height
 
         # Elements
         svg.g transform: 'rotate(-90)' do
           unless ring.type == :library
-            svg.line x1: 0, y1: ring.size * FONT_WIDTH + LINE_HEIGHT + 2,
-                     x2: 0, y2: ring.size * FONT_WIDTH + LINE_HEIGHT * 2 - 2,
+            log ring.type
+            svg.line x1: 0, y1: radius + @line_height + 2,
+                     x2: 0, y2: radius + @line_height * 2 - 2,
                      transform: 'rotate(-90)'
           end
 
           i = 0
           ring.elements.each do |el|
             draw_element el, i, ring
-            i += el.chars.size + SPACE_SIZE
+            i += el.width(@font, @font_size) + @space_width
           end
         end
       end
@@ -42,9 +43,9 @@ module Spellrings
 
       # Other
       case ring.type
-      when :library then decorate_library ring # TODO: Implement decorate_library
+      when :library  then decorate_library  ring
       when :grimoire then decorate_grimoire ring
-      when :spell then decorate_spell ring
+      when :spell    then decorate_spell    ring
       end
     end
 
@@ -53,7 +54,7 @@ module Spellrings
     end
 
     def decorate_grimoire(ring)
-      draw_star ring.size * FONT_WIDTH, ring.elements.size
+      draw_star ring.radius(@font, @font_size), ring.elements.size
     end
 
     def decorate_spell(ring)

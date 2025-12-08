@@ -5,6 +5,19 @@ require_relative '../lib/spellrings_rb'
 
 EXAMPLES_DIR = File.expand_path('../examples', __dir__)
 EXAMPLES = Dir.glob(File.join(EXAMPLES_DIR, '*')).select { |f| File.directory? f }.map { |d| File.basename d }
+DEFAULT_FONT = 'Z003'
+
+def build_example(name)
+  unless EXAMPLES.include? name
+    puts "Example '#{name}' not found."
+    puts "Available examples: #{EXAMPLES.join(', ')}"
+    exit 1
+  end
+
+  puts "Building example '#{name}'..."
+  Spellrings.build_file File.join(EXAMPLES_DIR, name, "#{name}.rb")
+  puts "Done! Look for example '#{name}' here: #{File.join(EXAMPLES_DIR, name, "#{name}.svg")}"
+end
 
 def build_examples
   Dir.glob(File.join(EXAMPLES_DIR, '*')).select { |f| File.directory? f }.each do |dir|
@@ -14,34 +27,21 @@ def build_examples
   puts "Done! Look for examples here: #{EXAMPLES_DIR}"
 end
 
+def build_file(source_file, output_file = nil)
+  puts "Building #{source_file}..."
+  output_file ||= File.join(File.dirname(source_file), "#{File.basename(source_file, '.rb')}.svg")
+  Spellrings.build_file source_file, output_file: output_file, font_family: ENV['SPELLRING_FONT'] || DEFAULT_FONT
+  puts "Done! Look for output file here: #{output_file}"
+end
+
 if __FILE__ == $PROGRAM_NAME
 
   case ARGV
-  in ['examples', 'list']
-    puts "Available examples: #{EXAMPLES.join(', ')}"
-  in ['examples', name]
-    unless EXAMPLES.include? name
-      puts "Example '#{name}' not found."
-      puts "Available examples: #{EXAMPLES.join(', ')}"
-      exit 1
-    end
-
-    puts "Building example '#{name}'..."
-    Spellrings.build_file File.join(EXAMPLES_DIR, name, "#{name}.rb")
-    puts "Done! Look for example '#{name}' here: #{File.join(EXAMPLES_DIR, name, "#{name}.svg")}"
-  in ['examples'] then build_examples
-  in ['node_types', source_file]
-    puts "Node types in #{source_file}: #{Spellrings.node_types File.read source_file}"
-  in [source_file, *rest] if rest.size <= 1
-    puts "Building #{source_file}..."
-    output_file =
-      if rest.empty?
-        File.join(File.dirname(source_file), "#{File.basename(source_file, '.rb')}.svg")
-      else
-        rest.first
-      end
-    Spellrings.build_file source_file, output_file
-    puts "Done! Look for output file here: #{output_file}"
+  in ['examples', 'list']        then puts "Available examples: #{EXAMPLES.join(', ')}"
+  in ['examples', name]          then build_example name
+  in ['examples']                then build_examples
+  in ['node_types', source_file] then puts "#{source_file}:\n#{Spellrings.node_types(File.read(source_file)).to_a.sort}"
+  in [source_file, *rest] if rest.size <= 1 then build_file source_file, *rest
   else
     puts <<~TEXT
       Usage:

@@ -4,15 +4,15 @@ require_relative 'spellrings_rb/fonts'
 require_relative 'spellrings_rb/parser'
 require_relative 'spellrings_rb/visualizer'
 
+# Spellrings lib
 module Spellrings
   class << self
     def build_file(source_file, output_file: nil, font_family: DEFAULT_FONT)
       dir = File.dirname source_file
-      name = File.basename source_file, '.rb'
-      output_file ||= File.join dir, "#{name}.svg"
+      output_file ||= File.join dir, "#{File.basename source_file, '.rb'}.svg"
 
       library = Spellrings::Parser.parse_file source_file
-      Visualizer.new(library).generate_svg(font_family: font_family, output_file: output_file)
+      Visualizer.new(library).generate_svg(output_file, font_family: font_family)
       output_file
     end
 

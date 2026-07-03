@@ -50,7 +50,7 @@ module Spellrings
     end
 
     def decorate_library(ring)
-      # TODO: Implement decorate_library
+      draw_star ring.radius(@font, @font_size), 5
     end
 
     def decorate_grimoire(ring)
@@ -58,7 +58,7 @@ module Spellrings
     end
 
     def decorate_spell(ring)
-      # TODO: Implement decorate_spell
+      draw_star ring.radius(@font, @font_size), ring.elements.size
     end
   end
 end

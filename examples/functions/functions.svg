@@ -1,53 +1,38 @@
 <svg viewBox="-148.21831601722602 -118.04286430154013 209.13831601722603 288.7388408025413" font-family="Z003" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
 
-<rect x="-148.21831601722602" y="-118.04286430154013" width="209.13831601722603" height="288.7388408025413" class="debug"/>
-<circle cx="50.92" cy="0" r="0.5" class="debug"/>
-<circle cx="0" cy="50.92" r="0.5" class="debug"/>
-<circle cx="-50.92" cy="0" r="0.5" class="debug"/>
-<circle cx="0" cy="-50.92" r="0.5" class="debug"/>
-<circle cx="-17.181509068154657" cy="-11.934912908811667" r="0.5" class="debug"/>
-<circle cx="-59.41831601722601" cy="-68.64286430154013" r="0.5" class="debug"/>
-<circle cx="-98.81831601722601" cy="-29.24286430154013" r="0.5" class="debug"/>
-<circle cx="-138.21831601722602" cy="-68.64286430154013" r="0.5" class="debug"/>
-<circle cx="-98.81831601722601" cy="-108.04286430154013" r="0.5" class="debug"/>
-<circle cx="-11.207226887070972" cy="17.664780369472858" r="0.5" class="debug"/>
-<circle cx="-20.09909761980387" cy="110.61597650100114" r="0.5" class="debug"/>
-<circle cx="-70.17909761980387" cy="160.69597650100116" r="0.5" class="debug"/>
-<circle cx="-120.25909761980387" cy="110.61597650100114" r="0.5" class="debug"/>
-<circle cx="-70.17909761980387" cy="60.535976501001144" r="0.5" class="debug"/>
 <style>
 * {
-  stroke-width: 0.75;
-  --color: #9B111E;
+    stroke-width: 0.75;
+    --color: #9B111E;
 }
 
 text {
-  font-family: Z003;
-  font-size: 12px;
-  text-anchor: middle;
-  dominant-baseline: middle;
-  fill: var(--color);
+    font-family: Z003;
+    font-size: 12px;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    fill: var(--color);
 }
 
 line,
 circle,
 polygon,
 path {
-  fill: none;
-  stroke: var(--color);
+    fill: none;
+    stroke: var(--color);
 }
 
 .debug {
-  fill: none;
-  stroke: yellow;
+    fill: none;
+    stroke: yellow;
 }
 
 text.debug {
-  fill: yellow;
-  font-family: sans-serif;
-  font-size: 10px;
-  text-anchor: start;
-  dominant-baseline: hanging;
+    fill: yellow;
+    font-family: sans-serif;
+    font-size: 10px;
+    text-anchor: start;
+    dominant-baseline: hanging;
 }
 
 </style>
@@ -55,7 +40,7 @@ text.debug {
 <symbol id="sigil_begin" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <path d="M1.4695761589768238e-15,-24.0 L1.4695761589768238e-15,-24.0 L14.106846055019355,19.41640786499874 L-22.825356391083687,-7.416407864998735 L22.825356391083684,-7.416407864998737 L-14.106846055019354,19.41640786499874 Z"/>
 </symbol>
-<symbol id="sigil_true" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<symbol id="sigil_bool_true" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <text>
 T
 </text>
@@ -63,7 +48,7 @@ T
 <path d="M9.18485099360515e-16,-15.0 L9.18485099360515e-16,-15.0 L12.99038105676658,7.499999999999997 L-12.990381056766577,7.500000000000005 Z"/>
 </g>
 </symbol>
-<symbol id="sigil_false" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<symbol id="sigil_bool_false" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <text>
 F
 </text>
@@ -79,6 +64,20 @@ N
 <path d="M9.18485099360515e-16,-15.0 L9.18485099360515e-16,-15.0 L12.99038105676658,7.499999999999997 L-12.990381056766577,7.500000000000005 Z"/>
 </g>
 </symbol>
+<symbol id="sigil_send" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<circle r="9.0"/>
+<line x1="0" y1="-12.0" x2="0" y2="12.0"/>
+</symbol>
+<symbol id="sigil_if" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<polygon points="0,-18.0 18.0,0 0,18.0 -18.0,0"/>
+</symbol>
+<symbol id="sigil_block" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<circle r="15.0"/>
+<circle r="9.0"/>
+</symbol>
+<symbol id="sigil_assign" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
+<line x1="-18.0" y1="0" x2="18.0" y2="0"/>
+</symbol>
 <symbol id="sigil_unknown" viewBox="-30.0 -30.0 60.0 60.0" width="60.0" height="60.0">
 <circle r="15.0"/>
 </symbol>
@@ -87,15 +86,16 @@ N
 <text>
 functions
 </text>
+<path d="M1.2809805519081315e-15,-20.92 L1.2809805519081315e-15,-20.92 L12.296467477958538,16.924635522323904 L-19.896102320894617,-6.464635522323897 L19.896102320894613,-6.4646355223239 L-12.296467477958537,16.924635522323904 Z"/>
 <circle r="20.92"/>
 <circle r="50.92"/>
 <g transform="rotate(-90)">
-<circle stroke-dasharray="22.5523950663711 309.95377138957264" transform="rotate(0.0)rotate(-21.349693251533743)" r="52.92"/>
+<circle stroke-dasharray="22.5523950663711 309.95377138957264" transform="rotate(0.0)rotate(-21.349693251533743)" r="52.92" start-angle="0" end-angle="0.4261601486464682"/>
 <text transform="rotate(-90.0) translate(0,35.92)">
 L
 </text>
 <use href="#sigil_begin" transform="rotate(-90.0) translate(0,35.92) translate(-30.0, -30.0)"/>
-<circle stroke-dasharray="50.43123519866904 282.07493125727467" transform="rotate(-29.447852760736197)rotate(-51.533742331288344)" r="52.92"/>
+<circle stroke-dasharray="50.43123519866904 282.07493125727467" transform="rotate(-29.447852760736197)rotate(-51.533742331288344)" r="52.92" start-angle="0" end-angle="0.9529711866717505"/>
 <text transform="rotate(-119.4478527607362) translate(0,35.92)">
 :
 </text>
@@ -111,22 +111,25 @@ c
 <text transform="rotate(-168.7730061349693) translate(0,35.92)">
 t
 </text>
+<circle cx="0" cy="52.92" r="2" transform="rotate(-145.21472392638037)"/>
+<line x1="0" y1="52.92" x2="0" y2="108.92" transform="rotate(-145.21472392638037)"/>
 <g class="ring spell def" transform="rotate(-145.21472392638037)translate(0,120.32)">
 <text>
 fact
 </text>
+<path d="M-9.4,-1.1511679911985121e-15 L-2.9047597471245052,-8.939931253174445 L7.604759747124507,-5.525181371549247 L7.604759747124507,5.525181371549247 L-2.9047597471245052,8.939931253174445 Z"/>
 <circle r="9.4"/>
 <circle r="39.4"/>
 <g transform="rotate(-90)">
 <line x1="0" y1="41.4" x2="0" y2="67.4" transform="rotate(-90)"/>
-<circle stroke-dasharray="207.8440739701435 52.27979774709135" transform="rotate(0.0)rotate(-243.52941176470586)" r="41.4"/>
+<circle stroke-dasharray="207.8440739701435 52.27979774709135" transform="rotate(0.0)rotate(-243.52941176470586)" r="41.4" start-angle="0" end-angle="5.020388260148394"/>
 <text transform="rotate(-90.0) translate(0,24.4)">
 S
 </text>
 <use href="#sigil_begin" transform="rotate(-90.0) translate(0,24.4) translate(-30.0, -30.0)"/>
 </g>
 </g>
-<circle stroke-dasharray="110.94871743707189 221.55744901887186" transform="rotate(-89.079754601227)rotate(-117.05521472392638)" r="52.92"/>
+<circle stroke-dasharray="110.94871743707189 221.55744901887186" transform="rotate(-89.079754601227)rotate(-117.05521472392638)" r="52.92" start-angle="0" end-angle="2.096536610677851"/>
 <text transform="rotate(-179.079754601227) translate(0,35.92)">
 :
 </text>
@@ -157,24 +160,27 @@ c
 <text transform="rotate(-296.87116564417175) translate(0,35.92)">
 i
 </text>
+<circle cx="0" cy="52.92" r="2" transform="rotate(-237.6073619631902)"/>
+<line x1="0" y1="52.92" x2="0" y2="108.92" transform="rotate(-237.6073619631902)"/>
 <g class="ring spell def" transform="rotate(-237.6073619631902)translate(0,131.0)">
 <text>
 fibonacci
 </text>
+<path d="M-20.08,-2.459090772687885e-15 L-6.205061247048942,-19.097214847206683 L16.245061247048945,-11.802727866032859 L16.245061247048945,11.802727866032859 L-6.205061247048942,19.097214847206683 Z"/>
 <circle r="20.08"/>
 <circle r="50.08"/>
 <g transform="rotate(-90)">
 <line x1="0" y1="52.08" x2="0" y2="78.08" transform="rotate(-90)"/>
-<circle stroke-dasharray="261.4618205885283 65.76647020938452" transform="rotate(0.0)rotate(-243.52941176470586)" r="52.08"/>
+<circle stroke-dasharray="261.4618205885283 65.76647020938452" transform="rotate(0.0)rotate(-243.52941176470586)" r="52.08" start-angle="0" end-angle="5.020388260148394"/>
 <text transform="rotate(-90.0) translate(0,35.08)">
 S
 </text>
 <use href="#sigil_begin" transform="rotate(-90.0) translate(0,35.08) translate(-30.0, -30.0)"/>
 </g>
 </g>
-<circle stroke-dasharray="2.8332154605993844 329.67295099534437" transform="rotate(-214.23312883435585)rotate(0.0)" r="52.92"/>
+<circle stroke-dasharray="2.8332154605993844 329.67295099534437" transform="rotate(-214.23312883435585)rotate(0.0)" r="52.92" start-angle="0" end-angle="0.05353770711639048"/>
 <use href="#sigil_unknown" transform="rotate(-304.23312883435585) translate(0,35.92) translate(-30.0, -30.0)"/>
-<circle stroke-dasharray="55.191037172476015 277.31512928346774" transform="rotate(-222.3312883435583)rotate(-56.68711656441718)" r="52.92"/>
+<circle stroke-dasharray="55.191037172476015 277.31512928346774" transform="rotate(-222.3312883435583)rotate(-56.68711656441718)" r="52.92" start-angle="0" end-angle="1.0429145346272866"/>
 <text transform="rotate(-312.3312883435583) translate(0,35.92)">
 p
 </text>
@@ -187,10 +193,10 @@ t
 <text transform="rotate(-357.239263803681) translate(0,35.92)">
 s
 </text>
-<use href="#sigil_unknown" transform="rotate(-318.4662576687116) translate(0,35.92) translate(-30.0, -30.0)"/>
-<circle stroke-dasharray="2.8332154605993844 329.67295099534437" transform="rotate(-287.1165644171779)rotate(0.0)" r="52.92"/>
+<use href="#sigil_send" transform="rotate(-318.4662576687116) translate(0,35.92) translate(-30.0, -30.0)"/>
+<circle stroke-dasharray="2.8332154605993844 329.67295099534437" transform="rotate(-287.1165644171779)rotate(0.0)" r="52.92" start-angle="0" end-angle="0.05353770711639048"/>
 <use href="#sigil_unknown" transform="rotate(-377.116564417178) translate(0,35.92) translate(-30.0, -30.0)"/>
-<circle stroke-dasharray="55.191037172476015 277.31512928346774" transform="rotate(-295.2147239263804)rotate(-56.68711656441718)" r="52.92"/>
+<circle stroke-dasharray="55.191037172476015 277.31512928346774" transform="rotate(-295.2147239263804)rotate(-56.68711656441718)" r="52.92" start-angle="0" end-angle="1.0429145346272866"/>
 <text transform="rotate(-385.2147239263804) translate(0,35.92)">
 p
 </text>
@@ -203,7 +209,7 @@ t
 <text transform="rotate(-430.12269938650314) translate(0,35.92)">
 s
 </text>
-<use href="#sigil_unknown" transform="rotate(-391.3496932515338) translate(0,35.92) translate(-30.0, -30.0)"/>
+<use href="#sigil_send" transform="rotate(-391.3496932515338) translate(0,35.92) translate(-30.0, -30.0)"/>
 </g>
 </g>
 </svg>

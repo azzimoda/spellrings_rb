@@ -71,7 +71,8 @@ module Spellrings
     end
 
     def circle_sector(start_angle: 0, end_angle: 2 * Math::PI, **kwargs)
-      kwargs.merge({ start_angle: start_angle, end_angle: end_angle })
+      kwargs[:start_angle] = start_angle
+      kwargs[:end_angle] = end_angle
       c = 2 * Math::PI * kwargs[:r]
       arc_length = c * (end_angle - start_angle) / (2 * Math::PI)
 

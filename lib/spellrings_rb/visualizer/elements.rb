@@ -14,10 +14,10 @@ module Spellrings
 
       case [element.type, element.content]
       in [:grimoire | :spell, _]
-        # TODO: Draw sigil of the ring.
-        # svg.text element.type.to_s[0].upcase, transform: el_transform
         draw_word Element.new(:word, element.name), start, ring
-        transform = child_cicle_transform start + element.width(@font, @font_size) / 2.0, ring, element
+        mid = start + element.width(@font, @font_size) / 2.0
+        draw_child_link mid, ring, element
+        transform = child_cicle_transform mid, ring, element
         draw_ring element, transform: transform
 
       in [:word, Complex | Rational] then draw_word element.content.inspect.gsub(/[()]/, ''), start, ring
@@ -44,9 +44,7 @@ module Spellrings
     def decorate_element(element, start, ring)
       case [element.type, element.content]
       in [:word, String] then decorate_string element, start, ring
-        # in [:word, Symbol] then decorate_symbol element, start, ring
-        # in [:word, Regexp] then decorate_regexp element, start, ring
-      else
+      else nil
       end
     end
 
@@ -124,6 +122,18 @@ module Spellrings
       angle = 2 * Math::PI * idx / size
       degrees = angle_offset - 90 - angle * 180 / Math::PI
       "rotate(#{degrees})"
+    end
+
+    def draw_child_link(idx, parent_ring, child_ring)
+      parent_radius = parent_ring.radius @font, @font_size
+      circle_length = parent_ring.circle_length @font, @font_size
+      transform = rotate_transform idx, circle_length
+
+      y1 = parent_radius + @line_height + 2
+      y2 = parent_radius + @line_height * 3 - 2
+
+      svg.circle cx: 0, cy: y1, r: 2, transform: transform
+      svg.line x1: 0, y1: y1, x2: 0, y2: y2, transform: transform
     end
   end
 end

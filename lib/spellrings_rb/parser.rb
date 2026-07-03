@@ -18,7 +18,7 @@ module Spellrings
     end
 
     def parse(source)
-      on_ring Prism::Translation::Parser34.parse(source), name: 'Library'
+      on_ring Prism::Translation::Parser34.parse(source), lib: 'Library'
     end
 
     def log(*args)
@@ -72,6 +72,8 @@ module Spellrings
     def parse_body(ast, ring)
       log "body: #{ast.inspect}"
       ring << Element.new(:sigil, id: :begin, word: ring.type.to_s[0].upcase)
+      return unless ast
+
       case ast.type
       in :begin then on_begin ast, ring
       else on_element ast, ring
@@ -91,8 +93,8 @@ module Spellrings
       case ast.type
       in type if RING_TOKENS.include? type then ring << on_ring(ast)
 
-      in :true then ring << Element.new(:sigil, id: :true) # rubocop:disable Lint/BooleanSymbol
-      in :false then ring << Element.new(:sigil, id: :false) # rubocop:disable Lint/BooleanSymbol
+      in :true then ring << Element.new(:sigil, id: :bool_true)
+      in :false then ring << Element.new(:sigil, id: :bool_false)
       in :nil then ring << Element.new(:sigil, id: :nil)
       in :int | :float | :str | :sym | :complex | :rational
         ring << Element.new(:word, ast.children[0])

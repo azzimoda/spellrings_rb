@@ -3,6 +3,7 @@
 require 'ostruct'
 require 'victor'
 require_relative 'visualizer/rings'
+require_relative 'visualizer/layout'
 require_relative 'fonts'
 
 module Spellrings
@@ -39,6 +40,8 @@ module Spellrings
       @color = @opts[:color]
       @viewbox_padding = @opts[:viewbox_padding]
       initialize_metrics
+
+      compute_layout @library
 
       x, y, width, height = viewbox ? viewbox.split(' ').map(&:to_f) : compute_viewbox
       log "viewBox: #{x} #{y} #{width} #{height}"
@@ -194,7 +197,7 @@ module Spellrings
           next
         end
 
-        child_center_distance = outer_radius + element.radius(@font, @font_size) + @line_height * 2
+        child_center_distance = layout_distance library, element
 
         angle = rotation_angle start_angle, i, element.width(@font, @font_size), circle_length
         child_center = center + Vector[child_center_distance * Math.cos(angle),

@@ -206,7 +206,7 @@ z
 e
 </text>
 <circle cx="0" cy="64.0856365273261" r="2" transform="rotate(-142.07142857142856)"/>
-<line x1="0" y1="64.0856365273261" x2="0" y2="120.0856365273261" transform="rotate(-142.07142857142856)"/>
+<line x1="0" y1="64.0856365273261" x2="0" y2="120.08563652732612" transform="rotate(-142.07142857142856)"/>
 <g class="ring spell def" transform="rotate(-142.07142857142856)translate(0,142.16563652732611)">
 <text>
 initialize
@@ -327,7 +327,7 @@ c
 e
 </text>
 <circle cx="0" cy="64.0856365273261" r="2" transform="rotate(-409.92857142857144)"/>
-<line x1="0" y1="64.0856365273261" x2="0" y2="120.0856365273261" transform="rotate(-409.92857142857144)"/>
+<line x1="0" y1="64.0856365273261" x2="0" y2="120.08563652732609" transform="rotate(-409.92857142857144)"/>
 <g class="ring spell def" transform="rotate(-409.92857142857144)translate(0,142.88563652732608)">
 <text>
 introduce
@@ -439,7 +439,7 @@ z
 e
 </text>
 <circle cx="0" cy="59.31098823456924" r="2" transform="rotate(-151.17482517482517)"/>
-<line x1="0" y1="59.31098823456924" x2="0" y2="115.31098823456924" transform="rotate(-151.17482517482517)"/>
+<line x1="0" y1="59.31098823456924" x2="0" y2="115.31098823456925" transform="rotate(-151.17482517482517)"/>
 <g class="ring spell def" transform="rotate(-151.17482517482517)translate(0,137.39098823456925)">
 <text>
 initialize
@@ -656,7 +656,7 @@ z
 e
 </text>
 <circle cx="0" cy="58.47065013504403" r="2" transform="rotate(-153.11688311688312)"/>
-<line x1="0" y1="58.47065013504403" x2="0" y2="114.47065013504402" transform="rotate(-153.11688311688312)"/>
+<line x1="0" y1="58.47065013504403" x2="0" y2="114.47065013504404" transform="rotate(-153.11688311688312)"/>
 <g class="ring spell def" transform="rotate(-153.11688311688312)translate(0,136.55065013504404)">
 <text>
 initialize
@@ -755,7 +755,7 @@ d
 y
 </text>
 <circle cx="0" cy="58.47065013504403" r="2" transform="rotate(-419.0909090909092)"/>
-<line x1="0" y1="58.47065013504403" x2="0" y2="114.47065013504402" transform="rotate(-419.0909090909092)"/>
+<line x1="0" y1="58.47065013504403" x2="0" y2="114.47065013504404" transform="rotate(-419.0909090909092)"/>
 <g class="ring spell def" transform="rotate(-419.0909090909092)translate(0,129.11065013504404)">
 <text>
 study

@@ -112,7 +112,7 @@ c
 t
 </text>
 <circle cx="0" cy="52.92" r="2" transform="rotate(-145.21472392638037)"/>
-<line x1="0" y1="52.92" x2="0" y2="108.92" transform="rotate(-145.21472392638037)"/>
+<line x1="0" y1="52.92" x2="0" y2="108.91999999999999" transform="rotate(-145.21472392638037)"/>
 <g class="ring spell def" transform="rotate(-145.21472392638037)translate(0,120.32)">
 <text>
 fact

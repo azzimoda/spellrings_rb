@@ -110,8 +110,9 @@ module Spellrings
     end
 
     def child_cicle_transform(idx, parent_ring, child_ring)
+      distance = layout_distance parent_ring, child_ring
       "#{rotate_transform(idx, parent_ring.circle_length(@font, @font_size))}" \
-      "translate(0,#{parent_ring.radius(@font, @font_size) + child_ring.radius(@font, @font_size) + @line_height * 3})"
+      "translate(0,#{distance})"
     end
 
     def element_transform(idx, size, radius)
@@ -128,9 +129,10 @@ module Spellrings
       parent_radius = parent_ring.radius @font, @font_size
       circle_length = parent_ring.circle_length @font, @font_size
       transform = rotate_transform idx, circle_length
+      distance = layout_distance parent_ring, child_ring
 
       y1 = parent_radius + @line_height + 2
-      y2 = parent_radius + @line_height * 3 - 2
+      y2 = distance - child_ring.radius(@font, @font_size) - 2
 
       svg.circle cx: 0, cy: y1, r: 2, transform: transform
       svg.line x1: 0, y1: y1, x2: 0, y2: y2, transform: transform

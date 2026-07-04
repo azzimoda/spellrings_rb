@@ -168,8 +168,8 @@ z
 e
 </text>
 <circle cx="0" cy="70.19718634205489" r="2" transform="rotate(-133.73999999999998)"/>
-<line x1="0" y1="70.19718634205489" x2="0" y2="126.19718634205489" transform="rotate(-133.73999999999998)"/>
-<g class="ring spell def" transform="rotate(-133.73999999999998)translate(0,148.27718634205488)">
+<line x1="0" y1="70.19718634205489" x2="0" y2="126.19718634205492" transform="rotate(-133.73999999999998)"/>
+<g class="ring spell def" transform="rotate(-133.73999999999998)translate(0,148.2771863420549)">
 <text>
 initialize
 </text>
@@ -289,7 +289,7 @@ c
 e
 </text>
 <circle cx="0" cy="70.19718634205489" r="2" transform="rotate(-358.74)"/>
-<line x1="0" y1="70.19718634205489" x2="0" y2="126.19718634205489" transform="rotate(-358.74)"/>
+<line x1="0" y1="70.19718634205489" x2="0" y2="126.19718634205486" transform="rotate(-358.74)"/>
 <g class="ring spell def" transform="rotate(-358.74)translate(0,148.99718634205487)">
 <text>
 introduce

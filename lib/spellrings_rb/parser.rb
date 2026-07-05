@@ -62,6 +62,14 @@ module Spellrings
       end
     end
 
+    def on_block(ast)
+      send_node = ast.children[0]
+      _receiver, method_name, *_args = send_node.children
+      Ring.new(:spell, :block, method_name).tap do |ring|
+        parse_body ast.children[2], ring
+      end
+    end
+
     def on_args(ast)
       log "args: #{ast.to_sexp}"
       ast.children.map.with_object([]) do |arg, args|
@@ -101,7 +109,7 @@ module Spellrings
       in :regexp then ring.element :word, Regexp.new(ast.children[0].children[0])
 
       in :send then on_send ast, ring
-      # in :block then parse_block ast
+      in :block then ring << on_block(ast)
 
       else Element.new :unknown, ast
       end
